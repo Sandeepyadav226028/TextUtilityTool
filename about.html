@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About - TextUtility Tool</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    .fade-in {
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #4f46e5, #3b82f6);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 0.75rem;
+      margin: 1.5rem 0;
+      font-weight: 500;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .features-list {
+      list-style: none;
+      padding-left: 1rem;
+    }
+
+    .features-list li::before {
+      content: "??";
+      margin-right: 8px;
+      color: #10b981;
+    }
+
+    .developer-credit {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      color: #6b7280;
+    }
+
+    .developer-credit a {
+      color: #3b82f6;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .developer-credit a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 7V4a2 2 0 0 1 2-2h8.5L20 7.5V20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10.42 12.61a2.1 2.1 0 1 1 2.97 2.97L7.95 21 4 22l1-3.95 5.42-5.44Z"/>
+          </svg>
+          <h1>TextUtilityTool</h1>
+        </div>
+        <nav class="nav">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="about.html" class="nav-link">About</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main">
+    <div class="container fade-in">
+      <div class="card">
+        <h2 class="card-title">About <span class="highlight">TextUtility</span></h2>
+        <p>
+          TextUtility is your fast, free, and reliable online companion for editing and transforming text on the go.
+          Whether you're a writer, student, developer, or content creator, this tool is built to streamline your workflow.
+        </p>
+
+        <div class="highlight-box">
+           No Signups. No Ads. Just pure utility.
+        </div>
+
+        <h3>? Key Features:</h3>
+        <ul class="features-list">
+          <li>Convert text to <strong>UPPERCASE</strong>, <strong>lowercase</strong>, <strong>Title Case</strong>, and <strong>Sentence case</strong></li>
+          <li>Remove unwanted extra spaces</li>
+          <li>Live character and word count</li>
+          <li>Copy your result with a single click</li>
+          <li>Estimates reading time instantly</li>
+          <li>Responsive and mobile-friendly design</li>
+        </ul>
+
+        <p>
+          The tool is lightweight, runs entirely in your browser, and ensures your data never leaves your device. Perfect for quick editing tasks anytime, anywhere.
+        </p>
+
+        <div class="developer-credit">
+          Made with ?? by <a href="https://github.com/Sandeepyadav226028" target="_blank">Sandeepyadav</a><br/>
+          <small>— because great tools should be simple.</small>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p class="footer-text">
+          © 2025 TextUtility. All rights reserved. Crafted with care by 
+          <a href="#" class="footer-link">Sandeepyadav</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
