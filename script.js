@@ -9,7 +9,7 @@ body.setAttribute('data-theme', savedTheme);
 themeToggle.addEventListener('click', () => {
     const currentTheme = body.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
+
     body.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
 });
@@ -38,7 +38,42 @@ const textTransformations = {
 
     reverseText: (text) => text.split('').reverse().join(''),
 
-    clearText: () => ''
+    clearText: () => '',
+
+    toggleCase: (text) =>
+        text.split('').map(c =>
+            c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()
+        ).join(''),
+
+    vowelCount: (text) => {
+        const count = (text.match(/[aeiou]/gi) || []).length;
+        alert(`Vowel count: ${count}`);
+        return text;
+    },
+
+    consonantCount: (text) => {
+        const count = (text.match(/[bcdfghjklmnpqrstvwxyz]/gi) || []).length;
+        alert(`Consonant count: ${count}`);
+        return text;
+    },
+
+    isPalindrome: (text) => {
+        const normalized = text.replace(/[^a-z0-9]/gi, '').toLowerCase();
+        const isPalin = normalized === normalized.split('').reverse().join('');
+        alert(isPalin ? 'It is a palindrome!' : 'Not a palindrome.');
+        return text;
+    },
+
+    base64Encode: (text) => btoa(text),
+
+    base64Decode: (text) => {
+        try {
+            return atob(text);
+        } catch (e) {
+            alert('Invalid Base64!');
+            return text;
+        }
+    },
 };
 
 // DOM Elements
@@ -54,7 +89,7 @@ function analyzeText(text) {
     const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
     const characters = text.length;
     const readingTime = Math.ceil(words / 200); // Average reading speed
-    
+
     return { words, characters, readingTime };
 }
 
@@ -70,17 +105,15 @@ function downloadText() {
     link.click();
     document.body.removeChild(link);
 }
-textTransformations.reverseText = (text) => text.split('').reverse().join('');
-
 
 function updateTextAnalysis() {
     const text = textInput.value;
     const analysis = analyzeText(text);
-    
+
     wordCount.textContent = `${analysis.words} Words`;
     charCount.textContent = `${analysis.characters} Characters`;
     readTime.textContent = `${analysis.readingTime} mins`;
-    
+
     updatePreview(text);
     updateCopyButton(text);
 }
@@ -97,53 +130,40 @@ function updateCopyButton(text) {
     copyBtn.disabled = text.trim() === '';
 }
 
-// Text Transformation
 function transformText(transformation) {
     const currentText = textInput.value;
     let newText;
-    
+
     if (transformation === 'clearText') {
         newText = textTransformations[transformation]();
     } else {
         newText = textTransformations[transformation](currentText);
     }
-    
+
     textInput.value = newText;
     updateTextAnalysis();
-    
-    // Add visual feedback
+
     textInput.style.transform = 'scale(1.01)';
     setTimeout(() => {
         textInput.style.transform = 'scale(1)';
     }, 150);
 }
 
-// Copy to Clipboard
 async function copyToClipboard() {
     const text = textInput.value;
-    
     if (text.trim() === '') return;
-    
+
     try {
         await navigator.clipboard.writeText(text);
-        
-        // Show success state
         copyBtn.classList.add('copied');
-        
-        // Reset after 2 seconds
         setTimeout(() => {
             copyBtn.classList.remove('copied');
         }, 2000);
-        
     } catch (err) {
-        console.error('Failed to copy text: ', err);
-        
-        // Fallback for older browsers
         const textArea = document.createElement('textarea');
         textArea.value = text;
         document.body.appendChild(textArea);
         textArea.select();
-        
         try {
             document.execCommand('copy');
             copyBtn.classList.add('copied');
@@ -151,56 +171,38 @@ async function copyToClipboard() {
                 copyBtn.classList.remove('copied');
             }, 2000);
         } catch (fallbackErr) {
-            console.error('Fallback copy failed: ', fallbackErr);
+            console.error('Fallback copy failed:', fallbackErr);
         }
-        
         document.body.removeChild(textArea);
     }
 }
 
-// Event Listeners
 textInput.addEventListener('input', updateTextAnalysis);
-textInput.addEventListener('paste', () => {
-    // Small delay to ensure pasted content is processed
-    setTimeout(updateTextAnalysis, 10);
-});
+textInput.addEventListener('paste', () => setTimeout(updateTextAnalysis, 10));
 
-// Keyboard Shortcuts
 document.addEventListener('keydown', (e) => {
-    // Ctrl/Cmd + U for uppercase
     if ((e.ctrlKey || e.metaKey) && e.key === 'u') {
         e.preventDefault();
         transformText('uppercase');
     }
-    
-    // Ctrl/Cmd + L for lowercase
     if ((e.ctrlKey || e.metaKey) && e.key === 'l') {
         e.preventDefault();
         transformText('lowercase');
     }
-    
-    // Ctrl/Cmd + T for title case
     if ((e.ctrlKey || e.metaKey) && e.key === 't') {
         e.preventDefault();
         transformText('titleCase');
     }
-    
-    // Ctrl/Cmd + Shift + C for copy
     if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'C') {
         e.preventDefault();
         copyToClipboard();
     }
 });
 
-// Initialize
 updateTextAnalysis();
-
-// Add smooth scrolling for better UX
 document.documentElement.style.scrollBehavior = 'smooth';
-
-// Add loading animation for buttons
 document.querySelectorAll('.btn').forEach(button => {
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function () {
         this.style.transform = 'scale(0.95)';
         setTimeout(() => {
             this.style.transform = '';
@@ -208,7 +210,6 @@ document.querySelectorAll('.btn').forEach(button => {
     });
 });
 
-// Add focus management for accessibility
 textInput.addEventListener('focus', () => {
     textInput.style.boxShadow = '0 0 0 3px rgb(59 130 246 / 0.1)';
 });
@@ -217,11 +218,9 @@ textInput.addEventListener('blur', () => {
     textInput.style.boxShadow = '';
 });
 
-// Performance optimization: debounce text analysis for large texts
 let analysisTimeout;
 const originalUpdateTextAnalysis = updateTextAnalysis;
-
-updateTextAnalysis = function() {
+updateTextAnalysis = function () {
     clearTimeout(analysisTimeout);
     analysisTimeout = setTimeout(originalUpdateTextAnalysis, 100);
 };

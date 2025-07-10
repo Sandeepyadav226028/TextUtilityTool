@@ -1,126 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About - TextUtility Tool</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About - Text Utility</title>
   <style>
-    .fade-in {
-      animation: fadeIn 1s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .highlight-box {
-      background: linear-gradient(135deg, #4f46e5, #3b82f6);
-      color: white;
-      padding: 1rem 1.5rem;
-      border-radius: 0.75rem;
-      margin: 1.5rem 0;
-      font-weight: 500;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f0f4f8, #e0ecff);
+      margin: 0;
+      padding: 0;
+      color: #333;
+      overflow-x: hidden;
     }
 
-    .features-list {
-      list-style: none;
-      padding-left: 1rem;
-    }
-
-    .features-list li::before {
-      content: "??";
-      margin-right: 8px;
-      color: #10b981;
-    }
-
-    .developer-credit {
+    header {
+      background-color: #ffffff;
+      color: #4a90e2;
+      padding: 2rem 1rem;
       text-align: center;
+      animation: fadeInDown 1s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: #555;
+      margin-top: 0.5rem;
+    }
+
+    section {
+      padding: 2rem;
+      max-width: 960px;
+      margin: auto;
+      animation: fadeIn 1.5s ease;
+    }
+
+    h2 {
+      color: #4a90e2;
       margin-top: 2rem;
-      font-size: 0.95rem;
-      color: #6b7280;
     }
 
-    .developer-credit a {
-      color: #3b82f6;
-      text-decoration: none;
-      font-weight: 600;
+    p {
+      line-height: 1.6;
     }
 
-    .developer-credit a:hover {
-      text-decoration: underline;
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      flex: 1 1 calc(50% - 2rem);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .copy-btn {
+      background-color: #4a90e2;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+      display: block;
+      margin: 2.5rem auto 0;
+    }
+
+    .copy-btn:hover {
+      background-color: #3b78c2;
+      transform: scale(1.08);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #f0f0f0;
+      margin-top: 2rem;
+      font-size: 0.9rem;
     }
   </style>
 </head>
+
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="container">
-      <div class="header-content">
-        <div class="logo">
-          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 7V4a2 2 0 0 1 2-2h8.5L20 7.5V20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3"/>
-            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
-            <path d="M10.42 12.61a2.1 2.1 0 1 1 2.97 2.97L7.95 21 4 22l1-3.95 5.42-5.44Z"/>
-          </svg>
-          <h1>TextUtilityTool</h1>
-        </div>
-        <nav class="nav">
-          <a href="index.html" class="nav-link">Home</a>
-          <a href="about.html" class="nav-link">About</a>
-        </nav>
-      </div>
-    </div>
+
+  <header>
+    <h1>Get to Know Text Utility</h1>
+    <p>Your free online text formatter & manipulator tool</p>
   </header>
 
-  <!-- Main Content -->
-  <main class="main">
-    <div class="container fade-in">
-      <div class="card">
-        <h2 class="card-title">About <span class="highlight">TextUtility</span></h2>
-        <p>
-          TextUtility is your fast, free, and reliable online companion for editing and transforming text on the go.
-          Whether you're a writer, student, developer, or content creator, this tool is built to streamline your workflow.
-        </p>
+  <section>
+    <h2>What is Text Utility?</h2>
+    <p>
+      Text Utility is a simple, powerful online tool designed to make text formatting fast and effortless. It's not
+      meant to replace full word processors, but it shines in speeding up repetitive text tasks like case changes, space
+      trimming, and word/character counting.
+    </p>
 
-        <div class="highlight-box">
-           No Signups. No Ads. Just pure utility.
-        </div>
-
-        <h3>? Key Features:</h3>
-        <ul class="features-list">
-          <li>Convert text to <strong>UPPERCASE</strong>, <strong>lowercase</strong>, <strong>Title Case</strong>, and <strong>Sentence case</strong></li>
-          <li>Remove unwanted extra spaces</li>
-          <li>Live character and word count</li>
-          <li>Copy your result with a single click</li>
-          <li>Estimates reading time instantly</li>
-          <li>Responsive and mobile-friendly design</li>
-        </ul>
-
-        <p>
-          The tool is lightweight, runs entirely in your browser, and ensures your data never leaves your device. Perfect for quick editing tasks anytime, anywhere.
-        </p>
-
-        <div class="developer-credit">
-          Made with ?? by <a href="https://github.com/Sandeepyadav226028" target="_blank">Sandeepyadav</a><br/>
-          <small>— because great tools should be simple.</small>
-        </div>
+    <h2>Key Features</h2>
+    <div class="features">
+      <div class="feature-card">
+        <h3>Word & Character Counter</h3>
+        <p>Count words and characters instantly â€” great for essays, tweets, or character-limited messages.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Text Case Changer</h3>
+        <p>Convert text to lowercase, UPPERCASE, Title Case, or Sentence Case in one click.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Remove Extra Spaces</h3>
+        <p>Clean up unwanted spaces from your text or paragraphs quickly.</p>
+      </div>
+      <div class="feature-card">
+        <h3>One-Click Copy</h3>
+        <p>Copy the modified text instantly with a single button click.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Toggle Case</h3>
+        <p>Flip all letters to their opposite case (UPPER to lower and vice versa).</p>
+      </div>
+      <div class="feature-card">
+        <h3>Vowel & Consonant Count</h3>
+        <p>Analyze your text for the number of vowels and consonants.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Palindrome Checker</h3>
+        <p>Check if your input is a palindrome (reads the same backward).</p>
+      </div>
+      <div class="feature-card">
+        <h3>Base64 Encode/Decode</h3>
+        <p>Convert your text into Base64 format and decode it back safely.</p>
       </div>
     </div>
-  </main>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <p class="footer-text">
-          © 2025 TextUtility. All rights reserved. Crafted with care by 
-          <a href="#" class="footer-link">Sandeepyadav</a>
-        </p>
-      </div>
-    </div>
+    <h2>Why Use Text Utility?</h2>
+    <p>
+      Whether you're a student, blogger, writer, or developer â€” Text Utility offers lightweight, effective formatting
+      tools to make your life easier. And best of all? Itâ€™s completely free!
+    </p>
+
+    <button class="copy-btn" onclick="redirectToHome()">Try It Now</button>
+  </section>
+
+  <footer>
+    &copy; 2025 Text Utility. All rights reserved.
   </footer>
+
+  <!-- Optional Click Sound -->
+  <audio id="clickSound"
+    src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_cdb4bc8a5a.mp3?filename=mouse-click-153941.mp3"></audio>
+  <script>
+    function redirectToHome() {
+      const click = document.getElementById('clickSound');
+      click.play();
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 300);
+    }
+  </script>
+
 </body>
-</html>
+
+</html>0000000000000000000000000000
