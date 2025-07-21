@@ -191,15 +191,41 @@
   <!-- Optional Click Sound -->
   <audio id="clickSound"
     src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_cdb4bc8a5a.mp3?filename=mouse-click-153941.mp3"></audio>
-  <script>
-    function redirectToHome() {
-      const click = document.getElementById('clickSound');
-      click.play();
-      setTimeout(() => {
-        window.location.href = 'index.html'; 
-      }, 300);
+ <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Check if user is "logged in" (this is a placeholder, normally you would check a real session)
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+    if (!isLoggedIn) {
+      const loginOverlay = document.createElement('div');
+      loginOverlay.style.position = 'fixed';
+      loginOverlay.style.top = 0;
+      loginOverlay.style.left = 0;
+      loginOverlay.style.width = '100%';
+      loginOverlay.style.height = '100%';
+      loginOverlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+      loginOverlay.style.display = 'flex';
+      loginOverlay.style.justifyContent = 'center';
+      loginOverlay.style.alignItems = 'center';
+      loginOverlay.style.zIndex = '9999';
+
+      loginOverlay.innerHTML = `
+        <div style="background: white; padding: 2rem; border-radius: 10px; text-align: center; max-width: 400px;">
+          <h2>Login Required</h2>
+          <p>You must log in to access this page.</p>
+          <button id="loginBtn" style="padding: 0.5rem 1rem; margin-top: 1rem;">Login</button>
+        </div>
+      `;
+
+      document.body.appendChild(loginOverlay);
+
+      document.getElementById('loginBtn').addEventListener('click', function() {
+        localStorage.setItem('isLoggedIn', 'true');
+        document.body.removeChild(loginOverlay);
+      });
     }
-  </script>
+  });
+</script>
 
 </body>
 
