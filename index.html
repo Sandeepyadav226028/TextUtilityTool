@@ -30,6 +30,7 @@
                 <nav class="nav">
                     <a href="index.html" class="nav-link">Home</a>
                     <a href="about.html" class="nav-link">About</a>
+					<a href="#" onclick="logout()" class="nav-link">Logout</a>
 
                 </nav>
 
@@ -159,7 +160,18 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+
+<script>
+  if (!localStorage.getItem("isLoggedIn")) {
+    window.location.href = "login.html";
+  }
+
+  function logout() {
+    localStorage.clear();
+    window.location.href = "login.html";
+  }
+</script>
+<script src="script.js"></script>
 </body>
 
 </html>

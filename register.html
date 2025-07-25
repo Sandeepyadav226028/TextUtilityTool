@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0" />
+  <title>Register - Text Utility</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-content">
+      <div class="logo">
+        <h1>TextUtilityTool</h1>
+      </div>
+      <nav class="nav">
+        <a href="about.html" class="nav-link">About</a>
+        <a href="login.html" class="nav-link">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="main">
+    <div class="container">
+      <div class="auth-container">
+        <h2 class="auth-heading">Create Your Account</h2>
+        <form id="registerForm" class="auth-form" novalidate>
+          <input
+            type="text"
+            id="registerUsername"
+            placeholder="Username"
+            autocomplete="username"
+            required />
+          <input
+            type="password"
+            id="registerPassword"
+            placeholder="Password (min 6 chars)"
+            autocomplete="new-password"
+            required
+            minlength="6" />
+          <button type="submit" class="btn btn-primary" id="registerBtn">
+            Register
+          </button>
+          <p class="auth-error" id="registerError"></p>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById("registerForm");
+    const errorText = document.getElementById("registerError");
+    const btn = document.getElementById("registerBtn");
+
+    // simple username rule: letters, numbers, underscores, 3-20 chars
+    const usernameRegex = /^[A-Za-z0-9_]{3,20}$/;
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      errorText.textContent = "";
+
+      const username = document
+        .getElementById("registerUsername")
+        .value
+        .trim();
+      const password = document
+        .getElementById("registerPassword")
+        .value
+        .trim();
+
+      // client checks
+      if (!username || !password) {
+        errorText.textContent = "All fields are required.";
+        return;
+      }
+      if (!usernameRegex.test(username)) {
+        errorText.textContent =
+          "Username: 3-20 chars, letters/numbers/_ only.";
+        return;
+      }
+      if (password.length < 6) {
+        errorText.textContent = "Password must be at least 6 characters.";
+        return;
+      }
+
+      // disable button during request
+      btn.disabled = true;
+      btn.textContent = "Registering...";
+
+      try {
+        const res = await fetch("http://localhost:3000/api/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }),
+        });
+
+        if (res.ok) {
+          alert("Registration successful! Please login.");
+          window.location.href = "login.html";
+        } else {
+          // try reading server message
+          let msg = "Registration failed.";
+          try {
+            const data = await res.json();
+            if (data && data.error) msg = data.error;
+          } catch (_) {}
+          errorText.textContent = msg;
+        }
+      } catch (err) {
+        errorText.textContent = "Network error. Try again.";
+        console.error(err);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Register";
+      }
+    });
+  </script>
+</body>
+</html>

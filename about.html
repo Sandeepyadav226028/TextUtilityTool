@@ -191,15 +191,31 @@
   <!-- Optional Click Sound -->
   <audio id="clickSound"
     src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_cdb4bc8a5a.mp3?filename=mouse-click-153941.mp3"></audio>
-  <script>
-    function redirectToHome() {
-      const click = document.getElementById('clickSound');
-      click.play();
+<script>
+  function redirectToHome() {
+    const click = document.getElementById('clickSound');
+    click.play();
+
+    let attempts = parseInt(localStorage.getItem("guestAttempts") || "0");
+    attempts += 1;
+    localStorage.setItem("guestAttempts", attempts);
+
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+    if (isLoggedIn || attempts >= 5) {
+      // Allow guest mode access
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("username", "Guest");
+      window.location.href = "index.html";
+    } else {
       setTimeout(() => {
-        window.location.href = 'index.html'; 
+        window.location.href = "login.html";
       }, 300);
     }
-  </script>
+  }
+</script>
+
+
 
 </body>
 
